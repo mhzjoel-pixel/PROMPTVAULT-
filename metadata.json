@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Prompt Vault",
+  "description": "The world\u0027s first human-verified prompt marketplace. Mint, own, and monetize your AI instructions on World Chain with World ID verification.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
