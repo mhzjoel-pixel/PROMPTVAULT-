@@ -1,0 +1,2 @@
+import { Nav } from '../../components/nav';
+export default function Dashboard(){return <main><Nav/><section className="mx-auto grid max-w-7xl gap-4 p-6 md:grid-cols-3"><div className="glass rounded-2xl p-6"><p>Total staked</p><b className="text-3xl">0 ATX</b></div><div className="glass rounded-2xl p-6"><p>Rewards claimed</p><b className="text-3xl">0 ATX</b></div><div className="glass rounded-2xl p-6"><p>Attendance score</p><b className="text-3xl">100%</b></div></section></main>}

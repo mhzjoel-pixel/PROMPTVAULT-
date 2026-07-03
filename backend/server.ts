@@ -1,0 +1,10 @@
+import 'dotenv/config';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import { z } from 'zod';
+import { verifyCloudProof } from '@worldcoin/idkit';
+const app = express(); app.use(express.json({limit:'64kb'})); app.use(rateLimit({windowMs:60_000,limit:60}));
+const Proof = z.object({ proof:z.any(), merkle_root:z.string(), nullifier_hash:z.string(), verification_level:z.string(), signal:z.string().regex(/^0x[a-fA-F0-9]{40}$/) });
+app.post('/verify-world-id', async (req,res)=>{ const body=Proof.parse(req.body); const result=await verifyCloudProof(body, process.env.WORLD_ID_APP_ID!, process.env.WORLD_ID_ACTION!); if(!result.success) return res.status(400).json(result); res.json({ok:true,nullifierHash:body.nullifier_hash}); });
+app.get('/events', (_req,res)=>res.json({events:[]})); app.post('/create-event', (_req,res)=>res.status(501).json({error:'submit signed admin transaction to AttendXCore.createEvent'})); app.post('/stake', (_req,res)=>res.status(501).json({error:'client calls AttendXCore.stake after World ID verification'})); app.post('/claim-reward', (_req,res)=>res.status(501).json({error:'client calls AttendXCore.claimReward'})); app.get('/user/:wallet',(req,res)=>res.json({wallet:req.params.wallet,totalStaked:'0',rewardsClaimed:'0'}));
+app.listen(Number(process.env.PORT||4000),()=>console.log('AttendX API listening'));

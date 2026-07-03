@@ -1,0 +1,2 @@
+import { Nav } from '../../components/nav';
+export default function Admin(){return <main><Nav/><section className="mx-auto max-w-3xl p-6"><h1 className="text-4xl font-black">Admin panel</h1><form className="glass mt-8 grid gap-4 rounded-2xl p-6"><input className="rounded bg-white/10 p-3" placeholder="Title"/><input className="rounded bg-white/10 p-3" placeholder="Stake amount"/><input className="rounded bg-white/10 p-3" placeholder="Reward pool"/><button className="rounded bg-aqua p-3 font-bold text-black">Create event</button></form></section></main>}
