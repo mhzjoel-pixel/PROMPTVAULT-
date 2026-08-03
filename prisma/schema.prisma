@@ -1,0 +1,5 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+model User { id String @id @default(cuid()) walletAddress String @unique worldIdNullifier String? @unique totalStaked Decimal @default(0) rewardsClaimed Decimal @default(0) stakes Stake[] createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }
+model Event { id String @id @default(cuid()) eventId BigInt @unique title String description String? startTime DateTime endTime DateTime stakeAmount Decimal maxParticipants Int rewardPool Decimal participants Int @default(0) closed Boolean @default(false) stakes Stake[] createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }
+model Stake { id String @id @default(cuid()) userId String eventIdRef String onChainEventId BigInt amount Decimal timestamp DateTime @default(now()) attended Boolean @default(false) withdrawn Boolean @default(false) rewardClaimed Boolean @default(false) user User @relation(fields:[userId], references:[id]) event Event @relation(fields:[eventIdRef], references:[id]) @@unique([userId,onChainEventId]) }

@@ -1,0 +1,3 @@
+import Link from 'next/link';import { Nav } from '../../components/nav';
+const events=[{id:1,title:'World Chain Builder Night',stake:'25 ATX',reward:'5 ATX'},{id:2,title:'DeFi Security Workshop',stake:'50 ATX',reward:'APY'}];
+export default function Events(){return <main><Nav/><section className="mx-auto max-w-7xl p-6"><h1 className="text-4xl font-black">Events</h1><div className="mt-8 grid gap-4 md:grid-cols-2">{events.map(e=><Link className="glass rounded-2xl p-6" href={`/events/${e.id}`} key={e.id}><h2 className="text-2xl font-bold">{e.title}</h2><p className="mt-3 text-white/60">Stake {e.stake} · Reward {e.reward}</p></Link>)}</div></section></main>}
